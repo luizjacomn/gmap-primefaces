@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<f:facet name="first">
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+	</f:facet>
+
+	<title>Teste</title>
+
+	<script
+		src="http://maps.google.com/maps/api/js?key=AIzaSyDdbMgttlDqaG1dkYwqCXGVw4ugRqEJzRc"
+		type="text/javascript"></script>
+
+	<style>
+.container {
+	border-radius: 5px;
+}
+</style>
+
+</h:head>
+
+<h:body>
+	<h1>Teste Google Maps</h1>
+	<br />
+
+	<div class="ui-g">
+		<h:form>
+			<div class="ui-g-12">
+				<h:panelGrid>
+					<p:outputLabel value="Cidade: #{municipioBean.municipio.nome}" />
+
+					<h:panelGroup>
+						<p:commandButton value="Traçar rota"
+							disabled="#{municipioBean.criarRota}"
+							action="#{municipioBean.teste}" update="@form" />
+
+						<p:spacer width="10" height="0" />
+
+						<p:commandButton id="finalizar" value="Finalizar"
+							rendered="#{municipioBean.criarRota}"
+							action="#{municipioBean.tracarRota}" update="@form :frm:gmap" />
+					</h:panelGroup>
+				</h:panelGrid>
+			</div>
+		</h:form>
+	</div>
+
+	<div class="ui-g container">
+
+		<div class="ui-g-12">
+			<p:growl autoUpdate="true" life="5000" showDetail="true" />
+
+			<h:form id="frm">
+				<p:gmap id="gmap" center="#{municipioBean.center}" zoom="16"
+					type="HYBRID" style="width:100%;height:500px"
+					model="#{municipioBean.escolasModel}"
+					onPointClick="handlePointClick(event);" widgetVar="map">
+					<p:ajax event="overlaySelect"
+						listener="#{municipioBean.onMarkerSelect}"
+						update="dlg-detalhe" />
+<!-- 						oncomplete="if(#{municipioBean.criarRota eq false}) PF('detalhe').show()" -->
+				</p:gmap>
+			</h:form>
+
+			<p:dialog widgetVar="dlg" showEffect="fade" closable="false"
+				closeOnEscape="false" draggable="true" header="Adicionar Escola"
+				responsive="true" resizable="false">
+				<h:form prependId="false">
+					<h:panelGrid columns="2">
+						<h:outputLabel for="nome" value="Nome: " />
+						<p:inputText id="nome" value="#{municipioBean.escola.nome}" />
+					</h:panelGrid>
+
+					<h:panelGroup>
+						<p:commandButton value="Adicionar"
+							actionListener="#{municipioBean.addMarker}"
+							oncomplete="markerAddComplete()" update=":frm:gmap" />
+						<p:commandButton value="Cancelar" onclick="return cancel()" />
+					</h:panelGroup>
+
+					<h:inputHidden id="lat" value="#{municipioBean.escola.latitude}" />
+					<h:inputHidden id="lng" value="#{municipioBean.escola.longitude}" />
+				</h:form>
+			</p:dialog>
+
+			<p:dialog id="dlg-detalhe" widgetVar="detalhe" showEffect="fade"
+				closable="true" closeOnEscape="true" draggable="true"
+				header="Detalhes Escola" responsive="true" resizable="false"
+				modal="true">
+				<h:form prependId="false">
+					<h:panelGrid columns="2">
+						<p:outputLabel value="Nome: " style="font-weight: bold" />
+						<p:outputLabel value="#{municipioBean.escola.nome} " />
+
+						<p:outputLabel value="Município: " style="font-weight: bold" />
+						<p:outputLabel value="#{municipioBean.escola.municipio.nome} " />
+
+						<p:outputLabel value="Estado " style="font-weight: bold" />
+						<p:outputLabel
+							value="#{municipioBean.escola.municipio.estado.nome} " />
+					</h:panelGrid>
+				</h:form>
+			</p:dialog>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		var currentMarker = null;
+
+		function handlePointClick(event) {
+			if (currentMarker === null) {
+				document.getElementById('lat').value = event.latLng.lat();
+				document.getElementById('lng').value = event.latLng.lng();
+
+				currentMarker = new google.maps.Marker({
+					position : new google.maps.LatLng(event.latLng.lat(),
+							event.latLng.lng())
+				});
+
+				PF('map').addOverlay(currentMarker);
+
+				PF('dlg').show();
+			}
+		}
+
+		function markerAddComplete() {
+			var title = document.getElementById('nome');
+			currentMarker.setTitle(title.value);
+			title.value = "";
+
+			currentMarker = null;
+			PF('dlg').hide();
+		}
+
+		function cancel() {
+			PF('dlg').hide();
+			currentMarker.setMap(null);
+			currentMarker = null;
+
+			return false;
+		}
+	</script>
+
+</h:body>
+
+</html>
