@@ -30,6 +30,13 @@
 
 	<div class="ui-g">
 		<h:form>
+			<!-- 			<h:commandLink value="Directions" action="teste"> -->
+			<!-- 				<f:setPropertyActionListener value="#{municipioBean.municipio}" -->
+			<!-- 					target="#{myBean.municipio}" /> -->
+			<!-- 			</h:commandLink> -->
+
+			<h:link value="Directions" outcome="home" />
+
 			<div class="ui-g-12">
 				<h:panelGrid>
 					<p:outputLabel value="Cidade: #{municipioBean.municipio.nome}" />
@@ -61,9 +68,8 @@
 					model="#{municipioBean.escolasModel}"
 					onPointClick="handlePointClick(event);" widgetVar="map">
 					<p:ajax event="overlaySelect"
-						listener="#{municipioBean.onMarkerSelect}"
-						update="dlg-detalhe" />
-<!-- 						oncomplete="if(#{municipioBean.criarRota eq false}) PF('detalhe').show()" -->
+						listener="#{municipioBean.onMarkerSelect}" update="dlg-detalhe" />
+					<!-- 						oncomplete="if(#{municipioBean.criarRota eq false}) PF('detalhe').show()" -->
 				</p:gmap>
 			</h:form>
 
