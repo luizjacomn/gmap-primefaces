@@ -28,7 +28,9 @@ public class Escola implements Serializable {
 	private double longitude;
 
 	private Municipio municipio;
-
+	
+	private String latLng;
+	
 	@Transient
 	public LatLng getCoordenadas() {
 		return new LatLng(latitude, longitude);
@@ -37,6 +39,16 @@ public class Escola implements Serializable {
 	@Transient
 	public String getCoordenadasCentro() {
 		return latitude + ", " + longitude;
+	}
+	
+	@Transient
+	public String getLatLng() {
+		latLng = getCoordenadasCentro();
+		return latLng;
+	}
+	
+	public void setLatLng(String latLng) {
+		this.latLng = latLng;
 	}
 
 	@Id

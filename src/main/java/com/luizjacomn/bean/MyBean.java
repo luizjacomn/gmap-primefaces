@@ -10,6 +10,7 @@ import org.primefaces.context.RequestContext;
 
 import com.luizjacomn.bo.EscolaBO;
 import com.luizjacomn.bo.MunicipioBO;
+import com.luizjacomn.entity.Escola;
 import com.luizjacomn.entity.Municipio;
 
 @ManagedBean
@@ -18,25 +19,30 @@ public class MyBean implements Serializable {
 	private static final long serialVersionUID = 87376511160520638L;
 
 	private Municipio municipio;
-	private String origem;
-	private String destino;
-	
+
+	private Escola origem;
+	private Escola destino;
+
+	private Integer indexOrigem;
+	private Integer indexDestino;
+
 	public MyBean() {
 		iniciar();
 	}
-	
+
 	@PostConstruct
 	public void init() {
-		municipio = new Municipio();
+		municipio = MunicipioBO.getInstance().getMunicipio(1L);
+		setIndexOrigem(0);
+		setIndexDestino(1);
+		buscar();
 	}
 
 	public void buscar() {
-		municipio = MunicipioBO.getInstance().getMunicipio(1L);
-		origem = EscolaBO.getInstance().getEscolaPorMunicipio(municipio).get(0).getCoordenadasCentro();
-		municipio = MunicipioBO.getInstance().getMunicipio(2L);
-		destino = EscolaBO.getInstance().getEscolaPorMunicipio(municipio).get(0).getCoordenadasCentro();
+		origem = EscolaBO.getInstance().getEscolaPorMunicipio(municipio).get(getIndexOrigem());
+		destino = EscolaBO.getInstance().getEscolaPorMunicipio(municipio).get(getIndexDestino());
 	}
-	
+
 	public void iniciar() {
 		executeJS("initialize(-5.10562, -38.3671)");
 	}
@@ -48,21 +54,37 @@ public class MyBean implements Serializable {
 	public void setMunicipio(Municipio municipio) {
 		this.municipio = municipio;
 	}
-	
-	public String getOrigem() {
+
+	public Escola getOrigem() {
 		return origem;
 	}
-	
-	public void setOrigem(String origem) {
+
+	public void setOrigem(Escola origem) {
 		this.origem = origem;
 	}
-	
-	public String getDestino() {
+
+	public Escola getDestino() {
 		return destino;
 	}
-	
-	public void setDestino(String destino) {
+
+	public void setDestino(Escola destino) {
 		this.destino = destino;
+	}
+
+	public Integer getIndexOrigem() {
+		return indexOrigem;
+	}
+
+	public void setIndexOrigem(Integer indexOrigem) {
+		this.indexOrigem = indexOrigem;
+	}
+
+	public Integer getIndexDestino() {
+		return indexDestino;
+	}
+
+	public void setIndexDestino(Integer indexDestino) {
+		this.indexDestino = indexDestino;
 	}
 
 	public static void executeJS(String javascript) {

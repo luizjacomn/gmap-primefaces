@@ -1,53 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
-
-	<display-name>teste-gmap</display-name>
-
-	<welcome-file-list>
-		<welcome-file>home.xhtml</welcome-file>
-	</welcome-file-list>
-	
-	<servlet>
-		<servlet-name>Faces Servlet</servlet-name>
-		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>Faces Servlet</servlet-name>
-		<url-pattern>*.xhtml</url-pattern>
-	</servlet-mapping>
-
-	<context-param>
-		<param-name>javax.faces.PROJECT_STAGE</param-name>
-		<param-value>Development</param-value>
-	</context-param>
-
-	<context-param>
-		<param-name>primefaces.THEME</param-name>
-		<param-value>bootstrap</param-value>
-	</context-param>
-
-	<context-param>
-		<param-name>primefaces.FONT_AWESOME</param-name>
-		<param-value>true</param-value>
-	</context-param>
-
-	<context-param>
-		<param-name>javax.faces.DATETIMECONVERTER_DEFAULT_TIMEZONE_IS_SYSTEM_TIMEZONE</param-name>
-		<param-value>true</param-value>
-	</context-param>
-
-	<mime-mapping>
-		<extension>woff</extension>
-		<mime-type>application/font-woff</mime-type>
-	</mime-mapping>
-
-	<mime-mapping>
-		<extension>woff2</extension>
-		<mime-type>application/font-woff2</mime-type>
-	</mime-mapping>
-	
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+ <display-name>teste-gmap</display-name>
+ <context-param>
+  <param-name>javax.faces.DATETIMECONVERTER_DEFAULT_TIMEZONE_IS_SYSTEM_TIMEZONE</param-name>
+  <param-value>true</param-value>
+ </context-param>
+ <context-param>
+  <param-name>javax.faces.PROJECT_STAGE</param-name>
+  <param-value>Development</param-value>
+ </context-param>
+ <context-param>
+  <param-name>primefaces.FONT_AWESOME</param-name>
+  <param-value>true</param-value>
+ </context-param>
+ <context-param>
+  <param-name>primefaces.THEME</param-name>
+  <param-value>bootstrap</param-value>
+ </context-param>
+ <servlet>
+  <servlet-name>Faces Servlet</servlet-name>
+  <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+  <load-on-startup>1</load-on-startup>
+ </servlet>
+ <servlet-mapping>
+  <servlet-name>Faces Servlet</servlet-name>
+  <url-pattern>*.xhtml</url-pattern>
+ </servlet-mapping>
+ <mime-mapping>
+  <extension>woff</extension>
+  <mime-type>application/font-woff</mime-type>
+ </mime-mapping>
+ <mime-mapping>
+  <extension>woff2</extension>
+  <mime-type>application/font-woff2</mime-type>
+ </mime-mapping>
+ <welcome-file-list>
+  <welcome-file>dash.xhtml</welcome-file>
+ </welcome-file-list>
 </web-app>

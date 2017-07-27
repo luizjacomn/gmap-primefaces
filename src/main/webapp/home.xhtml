@@ -29,6 +29,12 @@
 		<h1>Google Maps API v3: Criando rotas</h1>
 
 		<h:form prependId="false">
+			<h:outputLabel for="index-origem" value="Escola de Origem: " />
+			<p:spinner id="index-origem" value="#{myBean.indexOrigem}" min="0"
+				max="4" stepFactor="1"/>
+			<h:outputLabel for="index-destino" value="Escola de Destino: " />
+			<p:spinner id="index-destino" value="#{myBean.indexDestino}" min="0"
+				max="4" stepFactor="1"/>
 			<p:commandButton value="Trazer destino" action="#{myBean.buscar}"
 				update="@form" />
 
@@ -37,16 +43,16 @@
 
 				<div>
 					<label>Origem:</label>
-					<p:inputText value="#{myBean.origem}" />
-					<h:inputHidden id="horigem" value="#{myBean.origem}" />
-					<p:outputLabel id="resultado1" />
+					<p:inputText value="#{myBean.origem.nome}" />
+					<h:inputHidden id="horigem"
+						value="#{myBean.origem.latLng}" />
 				</div>
 
 				<div>
 					<label>Destino:</label>
-					<p:inputText value="#{myBean.destino}" />
-					<h:inputHidden id="hdestino" value="#{myBean.destino}" />
-					<p:outputLabel id="resultado2" />
+					<p:inputText value="#{myBean.destino.nome}" />
+					<h:inputHidden id="hdestino"
+						value="#{myBean.destino.latLng}" />
 				</div>
 
 				<div>
