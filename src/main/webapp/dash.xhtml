@@ -12,85 +12,54 @@
 	</f:facet>
 
 	<title>Teste</title>
-	<style>
-#right-panel {
-	font-family: 'Roboto', 'sans-serif';
-	line-height: 30px;
-	padding-left: 10px;
-}
 
-#right-panel select, #right-panel input {
-	font-size: 15px;
-}
-
-#right-panel select {
-	width: 100%;
-}
-
-#right-panel i {
-	font-size: 12px;
-}
-
-html, body {
-	height: 100%;
-	margin: 0;
-	padding: 0;
-}
-
-#map {
-	height: 100%;
-	float: left;
-	width: 70%;
-	height: 100%;
-}
-
-#right-panel {
-	margin: 20px;
-	border-width: 2px;
-	width: 20%;
-	height: 400px;
-	float: left;
-	text-align: left;
-	padding-top: 0;
-}
-
-#directions-panel {
-	margin-top: 10px;
-	background-color: #FFEE77;
-	padding: 10px;
-}
-</style>
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"/>
+	<h:outputStylesheet library="css" name="style.css" />
+	<h:outputStylesheet library="css" name="dialog.css" />
 
 </h:head>
 
 <h:body>
 	<div id="map"></div>
-	<div id="right-panel">
-		<div>
-			<b>Origem:</b> <select id="start">
-				<option value="-5.110626, -38.370031">Monsenhor Tabosa</option>
-				<option value="-5.108643, -38.382069">Casa do Jacó</option>
-			</select> <br /> <b>Pontos:</b> <br /> <i>(Ctrl+Click or Cmd+Click for
-				multiple selection)</i> <br /> <select multiple="multiple"
-				id="waypoints">
-				<option value="-5.112356, -38.368368">Prefeitura</option>
-				<option value="-5.108134, -38.373137">Casa do Andrey</option>
-			</select> <br /> <b>Destino:</b> <select id="end">
-				<option value="-5.110626, -38.370031">Monsenhor Tabosa</option>
-				<option value="-5.108643, -38.382069">Casa do Jacó</option>
-			</select> <br /> <input type="submit" id="submit"></input>
-		</div>
-		<div id="directions-panel"></div>
+	<div class="window" id="janela1">
+		<a href="#" class="fechar">FECHAR</a>
+		<h1 class="titulo-dialogo">Trajeto</h1>
+		<div id="right-panel"></div>
 	</div>
+
+
+	<!-- mascara para cobrir o site -->
+	<div id="mascara"></div>
+	<!-- 		<div>
+			<b>Origem:</b> <select id="start">
+				<option value="-4.802678, -38.405870">Lagoa Funda</option>
+				<option value="-5.108643, -38.382069">Casa do Jacó</option> 
+			</select> <br /> <b>Pontos:</b> <br /> <i>(Ctrl+Click para Selecionar
+				vários)</i> <br />-->
+	<select multiple="multiple" id="waypoints">
+		<option value="-5.112356, -38.368368">Prefeitura</option>
+		<option value="-5.108134, -38.373137">Casa do Andrey</option>
+	</select>
+
+	<a href="#janela1" rel="modal" id="submit">Teste</a>
+	<!-- 		<p> -->
+	<!-- 			Total Distance: <span id="total"></span> -->
+	<!-- 		</p> -->
+	<!--<br /> <b>Destino:</b> <select id="end">
+				<option value="-5.108643, -38.382069">Casa do Jacó</option>
+				<option value="-5.110626, -38.370031">Monsenhor Tabosa</option>
+			</select> 
+			<br /> <input type="submit" id="submit"></input>
+		</div>
+		<div id="directions-panel"></div> -->
+	<!-- 	</div> -->
 	<!-- Replace the value of the key parameter with your own API key. -->
 	<script async="async" defer="defer"
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDdbMgttlDqaG1dkYwqCXGVw4ugRqEJzRc&amp;callback=initMap"></script>
 
 	<h:outputScript library="js" name="jquery.min.js" />
-
+	<h:outputScript library="js" name="dialog.js" />
 	<h:outputScript library="js" name="app.js" />
-
-
 </h:body>
 
 </html>

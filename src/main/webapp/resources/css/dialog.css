@@ -1,0 +1,35 @@
+.window {
+	display: none;
+	width: 50%;
+	height: 85%;
+	overflow-y: auto; position : absolute;
+	left: 0;
+	top: 0;
+	background: #FFF;
+	z-index: 9900;
+	padding: 10px;
+	border-radius: 10px;
+	position: absolute;
+}
+
+#mascara {
+	display: none;
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 9000;
+	background-color: #000;
+}
+
+.fechar {
+	display: block;
+	text-align: right;
+	text-decoration: none;
+	color: #009688;
+	font-family: 'Roboto', sans-serif;
+}
+
+.titulo-dialogo {
+	font-family: 'Roboto', sans-serif;
+	text-align: center;
+}
